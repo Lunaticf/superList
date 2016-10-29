@@ -4,10 +4,49 @@
         <title>superList</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="node_modules/normalize.css/normalize.css">
+        <link href="css/base.css" rel="stylesheet">
     </head>
     <body>
-    
+        <div class="container"><!-- the whole container -->
+            <h1>SuperList</h1>
+            <div class="add-task">
+                <input type="text" placeholder="eg.下午两点开会">
+                <button type="submit">submit</button>
+            </div>
+            <div class="tasks-list"><!-- tasks list start -->
+                <div class="task-item"><!-- task start -->
+                    <span><input type="checkbox"></span>
+                    <span class="task-content">item content 1</span>
+                    <span>delete</span>
+                    <span>detail</span>
+                </div><!-- task end -->
+                 <div class="task-item"><!-- task start -->
+                    <span><input type="checkbox"></span>
+                    <span class="task-content">item content 1</span>
+                    <span>delete</span>
+                    <span>detail</span>
+                </div><!-- task end -->
+                 <div class="task-item"><!-- task start -->
+                    <span><input type="checkbox"></span>
+                    <span class="task-content">item content 1</span>
+                    <span>delete</span>
+                    <span>detail</span>
+                </div><!-- task end -->
+            </div><!-- tasks list end -->
+            <div class="task-detail"><!-- task detail start -->
+                <div class="content">下午两点开会</div>
+                <div class="desc">
+                    <textarea></textarea>
+                </div>
+                <div class="remind"><!-- remind the time -->
+                    <input type="date">
+                    <button type="submit">submit</button>
+                </div><!-- remind the time end -->
+            </div><!-- task detail end -->
+           
+        </div><!-- the whole container end -->
+        <div class="task-detail-mask"></div>
         <script src="node_modules/jquery/dist/jquery.js"></script>
         <script src="js/base.js"></script>
     </body>
