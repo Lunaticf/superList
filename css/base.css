@@ -14,7 +14,7 @@ body {
     max-width: 700px;
     margin: 0 auto;
     position: relative;
-    padding-top: 100px;·
+    margin-top: 60px;
 }
 
 h1 {
@@ -126,4 +126,22 @@ input[type=text]:focus, input[type=date]:focus{
     right: 0;
     bottom: 0;
     background: rgba(30, 30, 30, .6);
+}
+
+.task-content {
+    margin-left: 10px;
+}
+
+.task-action {
+    color: #888;
+    font-size: 90%;
+    margin-right: 10px;
+}
+
+.task-action:hover {
+    color: #333;
+}
+
+.task-action-wrapper {
+    float: right;
 }

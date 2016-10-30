@@ -10,29 +10,11 @@
     <body>
         <div class="container"><!-- the whole container -->
             <h1>SuperList</h1>
-            <div class="add-task">
-                <input type="text" placeholder="eg.下午两点开会">
+            <form class="add-task">
+                <input name="content" type="text" placeholder="eg.下午两点开会" autofocus>
                 <button type="submit">submit</button>
-            </div>
+            </form>
             <div class="tasks-list"><!-- tasks list start -->
-                <div class="task-item"><!-- task start -->
-                    <span><input type="checkbox"></span>
-                    <span class="task-content">item content 1</span>
-                    <span>delete</span>
-                    <span>detail</span>
-                </div><!-- task end -->
-                 <div class="task-item"><!-- task start -->
-                    <span><input type="checkbox"></span>
-                    <span class="task-content">item content 1</span>
-                    <span>delete</span>
-                    <span>detail</span>
-                </div><!-- task end -->
-                 <div class="task-item"><!-- task start -->
-                    <span><input type="checkbox"></span>
-                    <span class="task-content">item content 1</span>
-                    <span>delete</span>
-                    <span>detail</span>
-                </div><!-- task end -->
             </div><!-- tasks list end -->
             <div class="task-detail"><!-- task detail start -->
                 <div class="content">下午两点开会</div>
@@ -47,7 +29,19 @@
            
         </div><!-- the whole container end -->
         <div class="task-detail-mask"></div>
+        <script type="text/html" id="module">
+            <div class="task-item">
+                <span><input type="checkbox"></span>
+                <span class="task-content"><%= content %></span>
+                <span class="task-action-wrapper">
+                    <span class="task-action"> delete</span>
+                    <span class="task-action"> detail</span>
+                </span>
+            </div>
+        </script>
+        <script src="node_modules/ejs/ejs.min.js"></script>
         <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="node_modules/store/store.js"></script>
         <script src="js/base.js"></script>
     </body>
 </html>
