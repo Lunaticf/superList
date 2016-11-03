@@ -43,7 +43,7 @@ textarea {
     width: 100%;
     border: 0;
     min-height: 100px;
-    background: #ddd;
+    background: #eee;
 }
 
 input[type=text], input[type=date] {
@@ -96,17 +96,37 @@ input[type=text]:focus, input[type=date]:focus{
     background: #eee;
 }
 
+.task-item.completed {
+    color: #aaa;
+    opacity: 0.7;
+}
+
+.task-item.completed::after {
+    content: "";
+    height: 1px;
+    background: #aaa;
+    width: 97%;
+    position: relative;
+    top: -8px;
+    display: block;
+    float: right;
+}
+
 .task-detail {
     width: 50%;
-    height: 100%;
     position: absolute;
-    bottom: 0;
+    top:0;
     right: 0;
     background: #fff;
     color: #333;
     z-index: 1;
     display: none;
+    border-radius: 10px;
+    padding: 5px 15px;
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .1);
+    -webkit-box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .1);
 }
+
 
 .task-detail .content{
     padding: 10px;
@@ -114,8 +134,22 @@ input[type=text]:focus, input[type=date]:focus{
     cursor: pointer;
 }
 
-.task-detail > * {
-    margin-bottom: 10px;
+.task-detail form * {
+    margin-bottom: 5px;
+}
+
+.task-detail button, .msg button{
+    margin-top: 5px;
+    background: #eee;
+}
+
+.task-detail button + button {
+    float: right;
+}
+
+.task-detail button:hover, .msg button:hover {
+    background: #23C3CA;
+    color: #fff;
 }
 
 .task-detail-mask {
@@ -125,7 +159,7 @@ input[type=text]:focus, input[type=date]:focus{
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(30, 30, 30, .6);
+    background: rgba(30, 30, 30, .2);
 }
 
 .task-content {
@@ -144,4 +178,18 @@ input[type=text]:focus, input[type=date]:focus{
 
 .task-action-wrapper {
     float: right;
+}
+
+.msg {
+    display: none;
+    text-align: center;
+    background: #2dab7c;
+    padding: 10px;
+    color: #fff;
+}
+
+
+
+.alerter {
+    opacity: 0;
 }
