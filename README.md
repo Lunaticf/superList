@@ -1,10 +1,11 @@
 # SuperList
-A slightly more powerful todoList
+A slightly but powerful todoList
 ## Get started
 
 ```
 npm install 
 ```
+Open the html.
 you will see a refreshing and simple todolist,but it's powerful.
 
 ## Features
