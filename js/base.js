@@ -1,5 +1,6 @@
 ;(function() {
-    var $form_add_task = $('.add-task'),
+    var $body = $('body'),
+        $form_add_task = $('.add-task'),
         $input = $form_add_task.find('input[name=content]'),
         $task_detail = $('.task-detail'),
         $task_detail_mask = $('.task-detail-mask'),
@@ -13,7 +14,110 @@
         $checkbox,
         $alerter = $('.alerter');
         
-        init();
+    init();
+
+    function myAlert(arg) {
+        if(typeof arg === "undefined") {
+            console.error('err: need title');
+            return;
+        } else {
+           
+            var config = {}, 
+                $box, 
+                $mask, 
+                $title, 
+                $content,
+                $cancel,
+                $confirm,
+                dfd,
+                confirmed;
+
+            if (typeof arg === "string" || "number") { 
+                config.title = arg + "";
+            } else {
+                config = $.extend(config, arg);
+            }
+
+            dfd = $.Deferred();
+            
+            $box = $('<div class="myAlert">'+'<div class="box-title">'+config.title+'</div>'+'<div class="box-content">'+'<div class="btn-group"><button class="confirm">确定</button><button class="cancel">取消</button></div>'+'</div>'+'</div>').css({
+                position: 'fixed',
+                width: 300,
+                height: 'auto',
+                background: '#fff',
+                'border-radius': 5,
+                'box-shadow': '0 1px 2px rgba(0,0,0,.5)',
+                color: '#444',
+                padding: '20px 20px'
+            });
+            $title = $box.find('.box-title').css({
+                padding: '5px 10px',
+                'font-weight': 900,
+                'font-size': 20,
+                'text-align': 'center'
+            });
+            $content = $box.find('.box-content').css({
+                'padding': '5px 10px',
+                'text-align': 'center'
+            });
+            $confirm = $content.find('button.confirm');
+            $cancel = $content.find('button.cancel');
+            $mask = $('<div></div>').css({
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'rgba(0, 0, 0, .5)'
+            });
+
+            var timer = setInterval(function () {
+                if(confirmed !== undefined) {
+                   
+                    dfd.resolve(confirmed);
+                    clearInterval(timer);
+                    $mask.remove();
+                    $box.remove();
+                }
+            }, 50);
+
+            $confirm.on('click', function() {
+                confirmed = true;
+            });
+
+            $cancel.on('click', function() {
+                confirmed = false;
+            });
+
+            $mask.on('click', function() {
+                 confirmed = false;
+            });
+
+            adjustPosition();
+            $(window).on('resize',function() { 
+               adjustPosition();
+            });
+
+           $body.append($mask).append($box);
+           return dfd.promise();
+        }
+
+        function adjustPosition() {
+            var window_width = $(window).width();
+            var window_height = $(window).height();
+            var box_width = $box.width();
+            var box_height = $box.height();
+
+            var box_left = window_width / 2 - box_width / 2;
+            var box_top = window_height / 2 - box_height / 2 - 170;
+            $box.css({
+                left: box_left,
+                top: box_top
+            }); 
+        }
+
+
+    }
 
     $form_add_task.on('submit', function(e) {
         // 禁用默认行为
@@ -41,8 +145,11 @@
         var $delete_task = $('.delete');
         $delete_task.on('click',function() {
             var index = $(this).parent().parent().data('index');
-            deleteTask(index);
-        });
+            myAlert("确定删除ヾ(°д°)ノ゛?")
+                .then(function (res) {
+                    res ? deleteTask(index) : null;
+                })
+            });
     }
 
     // 监听元素细节点击
@@ -76,10 +183,9 @@
     // 监听任务完成通知 
     function listenMsg() {
         $('.msg button').on('click', function() {
-          
-            $('.msg').hide();
+            $('.msg').slideUp("slow");
         })
-    }
+   } 
 
     function get(index) {
         return store.get('task_list')[index];
@@ -192,7 +298,6 @@
 
     function task_remind_check() {
          var current_timestamp;
-         showMsg('lalala');
          var timer = setInterval(function() {
             for(var i = 0; i < task_list.length; i++) {
                 var item = get(i);
@@ -207,14 +312,13 @@
                 }
             }
          }, 300);
-       
     }
 
     function showMsg(msg) {
         if (!msg) {
             return;
         }
-        $('.msg-content').html(msg).parent().show();
+        $('.msg-content').html(msg).parent().slideDown("slow");
         $alerter.get(0).play();
     }
 

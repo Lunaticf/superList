@@ -138,7 +138,7 @@ input[type=text]:focus, input[type=date]:focus{
     margin-bottom: 5px;
 }
 
-.task-detail button, .msg button{
+.task-detail button, .msg button, .myAlert button{
     margin-top: 5px;
     background: #eee;
 }
@@ -147,7 +147,7 @@ input[type=text]:focus, input[type=date]:focus{
     float: right;
 }
 
-.task-detail button:hover, .msg button:hover {
+.task-detail button:hover, .msg button:hover, .myAlert button:hover {
     background: #23C3CA;
     color: #fff;
 }
@@ -188,8 +188,23 @@ input[type=text]:focus, input[type=date]:focus{
     color: #fff;
 }
 
+.msg-content {
+    font-size: 1.7em;
+}
 
+.msg button {
+    margin-top: 10px;
+    padding: 5px 10px;
+}
 
 .alerter {
     opacity: 0;
+}
+
+.btn-group {
+    text-align: center;
+}
+
+.myAlert button + button{
+    margin-left: 60px;
 }
